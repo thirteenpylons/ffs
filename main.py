@@ -1,9 +1,12 @@
 """
-File manipulation library
+File manipulation lib
 
 Author: Christian M. Fulton
 Date: 03.Nov.2021
 """
+import os
+from json import dumps
+from json import loads
 
 
 class Manage:
@@ -45,9 +48,16 @@ class Manage:
             rfile.write(data)
 
     def read_counter(self):
-        if path.exists('counter.json'):
+        if os.path.exists('counter.json'):
             return loads(open('counter.json'), 'r') + 1
     
     def write_counter(self):
+        counter = self.read_counter()
         with open('counter.json', 'w') as rfile:
             rfile.write(dumps(counter))
+
+class Fthis:
+    """
+    play with fs
+    """
+    NotImplementedError
