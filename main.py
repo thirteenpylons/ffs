@@ -40,12 +40,26 @@ class Manage:
             fname = open(self.title, 'wt')
             fname.close()
     
-    def write_data(self, data):
+    def write_line(self, data):
         """
-        Append existing file
+        Append existing file with single line
         """
         with open(self.title, 'a') as rfile:
-            rfile.write(data)
+            rfile.write(data + '\n')
+    
+    def write_data(self, data):
+        """
+        Write data: should be tuple | list
+        """
+        NotImplementedError
+    
+    def read_me(self):
+        """
+        Read the file
+        """
+        with open(self.title, 'r') as rfile:
+            for line in rfile.readlines():
+                pass
 
     def read_counter(self):
         if os.path.exists('counter.json'):
