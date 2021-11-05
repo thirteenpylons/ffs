@@ -4,6 +4,7 @@ File manipulation lib
 Author: Christian M. Fulton
 Date: 03.Nov.2021
 """
+import shutil
 import os
 from json import dumps
 from json import loads
@@ -16,15 +17,20 @@ class Manage:
     :Use: Instantiate file object { fileobj = Manage('name') }
         -> Work with fileobj
     
-    Parameter title:
-    Parameter save:
-    Preconditions:
+    Parameter title: Title of the file to work with.
+    Parameter save: Saves the file(as .txt by default)
+    Preconditions: title must be a valid string following os naming convention.
     """
     def __init__(self, title, save=True):
         self.title = title
         self.save = save
+        loc = os.path
         if save:
-            self.make_file()
+            # check to see if file exists: if file exists -> don't save
+            if self.title in os.listdir(): 
+                print(f'Working with existing file: {self.title}')
+            else:
+                self.make_file()
     
     def make_file(self, ext='.txt'):
         """
@@ -59,7 +65,23 @@ class Manage:
         """
         with open(self.title, 'r') as rfile:
             for line in rfile.readlines():
-                pass
+                print(line)
+
+    def move_me(self, dst):
+        """
+        Move file around
+        Parameter dst:
+        Preconditions:
+        """
+        # if you're moving the file, you have to move with it 
+        #   || have a pointer -> file
+        # if dst == '..' -> move up 1 level
+        if dst == '..':
+            dst = os.path.abspath(os.path.join('.', os.pardir))
+        try:
+            shutil.move(self.title, dst)
+        except:
+            print(f'An error occurred when trying to move {self.title}')
 
     def read_counter(self):
         if os.path.exists('counter.json'):
