@@ -24,13 +24,20 @@ class Manage:
     def __init__(self, title, save=True):
         self.title = title
         self.save = save
-        loc = os.path
+        self.ext = ''
+        #loc = os.path
         if save:
             # check to see if file exists: if file exists -> don't save
             if self.title in os.listdir(): 
                 print(f'Working with existing file: {self.title}')
             else:
                 self.make_file()
+    
+    def name(self):
+        """
+        Return the name of the file with the extension.
+        """
+        return self.title + self.ext
     
     def make_file(self, ext='.txt'):
         """
@@ -43,6 +50,7 @@ class Manage:
         if self.title in os.listdir():
             print('File already exists...')
         else:
+            self.ext = ext
             fname = open(self.title, 'wt')
             fname.close()
     
