@@ -56,7 +56,7 @@ class Manage:
         TODO: Ability to save to path..
         """
         if not ext.startswith('.'):
-            ext = '.' + ext
+            ext = f'.{ext}'
         if self.title in os.listdir():
             print('File already exists...')
         else:
@@ -82,7 +82,7 @@ class Manage:
         Read the file
         """
         with open(self.title, 'r') as rfile:
-            for line in rfile.readlines():
+            for line in rfile:
                 print(line)
 
     def move_me(self, dst):
