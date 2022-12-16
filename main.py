@@ -32,6 +32,16 @@ class Manage:
                 print(f'Working with existing file: {self.title}')
             else:
                 self.make_file()
+
+    def make_ext(self, name):
+        """
+        build ext or use default.
+        """
+        if '.' in name:
+            indexed_ext = name.index('.')
+            self.ext = name[indexed_ext:]
+        else:
+            self.ext = self.ext
     
     def name(self):
         """
@@ -39,7 +49,7 @@ class Manage:
         """
         return self.title + self.ext
     
-    def make_file(self, ext='.txt'):
+    def make_file(self):
         """
         Make file if it doesn't exist
         file extension default - .txt
@@ -88,7 +98,7 @@ class Manage:
             dst = os.path.abspath(os.path.join('.', os.pardir))
         try:
             shutil.move(self.title, dst)
-        except:
+        except Exception:
             print(f'An error occurred when trying to move {self.title}')
 
     def read_counter(self):
